@@ -11,6 +11,7 @@ class Account extends Authenticatable
     use HasFactory;
 
     protected $table = 'account';
+    protected $primaryKey = 'UserID'; 
 
     protected $fillable = [
         'UserName',
@@ -19,7 +20,10 @@ class Account extends Authenticatable
         'Email',
         'Points',
         'IsActive',
-        'Role'        
+        'Role',
+        'PhoneNumber',
+        'FullName',
+        'Avatar',       
     ];
     public $timestamps = false;
 

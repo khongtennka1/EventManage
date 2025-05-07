@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Services\RegisterService;
+use App\Services\Interfaces\RegisterServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +13,7 @@ class RegisterController extends Controller
 {
     protected $registerService;
 
-    public function __construct(RegisterService $registerService)
+    public function __construct(RegisterServiceInterface $registerService)
     {
         $this->registerService = $registerService;
     }

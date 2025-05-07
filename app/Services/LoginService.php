@@ -2,11 +2,11 @@
 
 namespace App\Services;
 
-use App\Repositories\LoginRepositoryInterface;
+use App\Repositories\Interfaces\LoginRepositoryInterface;
+use App\Services\Interfaces\LoginServiceInterface;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
-class LoginService
+class LoginService implements LoginServiceInterface
 {
     protected $loginRepo;
 
@@ -20,7 +20,6 @@ class LoginService
         $account = $this->loginRepo->findBy('Email', $data['Email'] ?? null);
 
         if ($account) {
-            dd($account);
             if (Hash::check($data['Password'], $account->Password)) {
                 if ($account->IsActive == 0) {
                     return [
@@ -32,6 +31,8 @@ class LoginService
                 Auth::login($account);
                 request()->session()->regenerate();
 
+                session(['user' => $account]);
+                
                 return [
                     'success' => true,
                     'message' => 'Đăng nhập thành công',

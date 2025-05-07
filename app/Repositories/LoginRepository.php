@@ -2,7 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Account;
-use App\Repositories\LoginRepositoryInterface;
+use App\Repositories\Interfaces\LoginRepositoryInterface;
 
 class LoginRepository implements LoginRepositoryInterface
 {
@@ -13,9 +13,9 @@ class LoginRepository implements LoginRepositoryInterface
         $this->model = $account;
     }
 
-    public function findBy(string $attribute, $value)
+    public function findBy(string $Email, $value)
     {
-        return $this->model->where($attribute, $value)->first();
+        return $this->model->where($Email, $value)->first();
     }
 }
 ?>

@@ -16,10 +16,16 @@ class CheckRole
      * @param  mixed  $role
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->Role == $role) {
-            return $next($request);
+        if (Auth::check()){
+            if (Auth::user()->Role == 1) {
+                return $next($request);
+            }
+    
+            if (Auth::user()->Role == 0){
+                return redirect()->route('user.dashboard');
+            }
         }
 
         return redirect()->route('login.login');

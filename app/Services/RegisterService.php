@@ -2,10 +2,11 @@
 
 namespace App\Services;
 
-use App\Repositories\RegisterRepositoryInterface;
+use App\Repositories\Interfaces\RegisterRepositoryInterface;
+use App\Services\Interfaces\RegisterServiceInterface;
 use Illuminate\Support\Facades\Hash;
 
-class RegisterService
+class RegisterService implements RegisterServiceInterface
 {
     protected $registerRepo;
 

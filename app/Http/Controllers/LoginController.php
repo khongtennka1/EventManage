@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\LoginService;
+use App\Services\Interfaces\LoginServiceInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     protected $loginService;
 
-    public function __construct(LoginService $loginService)
+    public function __construct(LoginServiceInterface $loginService)
     {
         $this->loginService = $loginService;
     }
@@ -51,6 +51,18 @@ class LoginController extends Controller
         }
 
         return redirect()->route('login.login')->withErrors(['login' => $result['message']]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        //huy session
+        $request->session()->invalidate();
+        //tao lai token csrf
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login.login');
     }
 }
 ?>

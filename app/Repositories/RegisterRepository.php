@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Account;
 use Illuminate\Support\Facades\Hash;
-
+use App\Repositories\Interfaces\RegisterRepositoryInterface;
 class RegisterRepository implements RegisterRepositoryInterface
 {
     protected $model;
