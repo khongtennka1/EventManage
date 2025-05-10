@@ -24,6 +24,10 @@ use App\Services\Interfaces\UserManageServiceInterface;
 use App\Services\UserManageService;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use App\Repositories\Interfaces\EventApprovalRepositoryInterface;
+use App\Repositories\EventApprovalRepository;
+use App\Services\Interfaces\EventApprovalServiceInterface;
+use App\Services\EventApprovalService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -45,6 +49,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserManageServiceInterface::class, UserManageService::class);
         $this->app->bind(EventManageRepositoryInterface::class, EventManageRepository::class);
         $this->app->bind(EventManageServiceInterface::class, EventManageService::class);
+        $this->app->bind(EventApprovalRepositoryInterface::class, EventApprovalRepository::class);
+        $this->app->bind(EventApprovalServiceInterface::class, EventApprovalService::class);
     }
 
     /**

@@ -64,5 +64,10 @@ class LoginController extends Controller
 
         return redirect()->route('login.login');
     }
+
+    public function showForgotPasswordForm()
+    {
+        return view('auth.auth_recoverpw');
+    }
 }
 ?>

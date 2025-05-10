@@ -15,7 +15,7 @@ class EventManageRepository implements EventManageRepositoryInterface
 
     public function getAllEvent()
     {
-        return $this->model->all();
+        return $this->model->where('IsApproved', 1)->get();
     }
 
     public function create(array $data)

@@ -25,7 +25,7 @@ class AdminProfileController extends Controller
             return redirect()->route('login.login');
         }
 
-        return view('admin.admin_profile', ['user' => $user]);  
+        return view('admin.contacts-profile', ['user' => $user]);  
     }
 
     public function update(Request $request, $userID)
