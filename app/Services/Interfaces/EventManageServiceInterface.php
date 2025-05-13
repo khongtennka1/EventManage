@@ -11,5 +11,6 @@ interface EventManageServiceInterface
     public function find($eventName);
     public function show($eventID);
     public function getEventByID($eventID);
+    public function filterEvents($startDate, $eventTypeID, $departmentID);
 }
 ?>

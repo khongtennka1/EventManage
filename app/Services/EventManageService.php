@@ -47,5 +47,10 @@ class EventManageService implements EventManageServiceInterface
     {
         return $this->eventManageRepo->getEventByID($eventID);
     }
+
+    public function filterEvents($startDate, $eventTypeID, $departmentID)
+    {
+        return $this->eventManageRepo->filterEvents($startDate, $eventTypeID, $departmentID);
+    }
 }
 ?>

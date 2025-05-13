@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\UserManageServiceInterface;
 use App\Services\UserManageService;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UserManageController extends Controller
 {
@@ -20,10 +22,7 @@ class UserManageController extends Controller
     {
         $users = $this->userManageService->getAllUser();
 
-        $admins = $users->where('Role', 1);
-        $users = $users->where('Role', 0);
-
-        return view('admin.user_manage', compact('admins', 'users'));
+        return view('contacts-list', compact('users'));
     }
 
 
@@ -33,10 +32,7 @@ class UserManageController extends Controller
 
         $users = $this->userManageService->findUsers($keyword);
 
-        $admins = $users->where('Role', 1);
-        $users = $users->where('Role', 0);
-
-        return view('admin.user_manage', compact('admins', 'users'));
+        return redirect()->to('contacts-list')->with('users', $users);
     }
 
     public function delete($userID)
@@ -44,9 +40,99 @@ class UserManageController extends Controller
         $delete = $this->userManageService->delete($userID);
 
         if ($delete) {
-            return redirect()->route('user_manage')->with('success', 'Xoa thanh cong!');
+            return redirect()->to('contacts-list')->with('success', 'Xoa thanh cong!');
         } else {
-            return redirect()->route('user_manage')->withErrors('delete', 'Xoa that bai!');
+            return redirect()->to('contacts-list')->with('error', 'Xoa that bai!');
+        }
+    }
+
+    public function update(Request $request, $userID)
+    {
+        $validator = Validator::make($request->all(), [
+            'UserName' => 'string',
+            'FullName' => 'string',
+            'StudentCode' => 'string',
+            'Email' => 'email',
+            'PhoneNumber' => 'string',
+            'Address' => 'string',
+            'dob' => 'string',
+            'Avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = $request->only([
+            'UserName',
+            'FullName',
+            'StudentCode',
+            'Email',
+            'PhoneNumber',
+            'Address',
+            'dob',
+            'Avatar'
+        ]);
+
+        if ($request->hasFile('Avatar')) {
+            $avatarPath = $request->file('Avatar')->store('images', 'public');
+            $data['Avatar'] = $avatarPath;
+        }
+
+        $update = $this->userManageService->update($userID, $data);
+
+        if ($update) {
+            return redirect()->to('contacts-list')->with('success', 'Update successfully!');
+        } else {
+            return redirect()->to('contacts-list')->with('error', 'Update failed!');
+        }
+    }
+
+    public function create(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'UserName' => 'required|string|unique:account,UserName',
+            'FullName' => 'string',
+            'StudentCode' => 'required|string|unique:account,StudentCode',
+            'Email' => 'email',
+            'PhoneNumber' => 'string',
+            'Address' => 'string',
+            'dob' => 'string',
+            'Avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'Role' => 'int',
+            'Password' => 'string',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        $data = $request->only([
+            'UserName',
+            'FullName',
+            'StudentCode',
+            'Email',
+            'PhoneNumber',
+            'Address',
+            'dob',
+            'Avatar',
+            'Role',
+            'Password'
+        ]);
+
+        $data['Password'] = Hash::make($data['Password']);
+
+        if ($request->hasFile('Avatar')) {
+            $avatarPath = $request->file('Avatar')->store('images', 'public');
+            $data['Avatar'] = $avatarPath;
+        }
+
+        $create = $this->userManageService->create($data);
+
+        if ($create) {
+            return redirect()->to('contacts-list')->with('success', 'Create successfully!');
+        } else {
+            return redirect()->to('contacts-list')->with('error', 'Create failed!');
         }
     }
 }

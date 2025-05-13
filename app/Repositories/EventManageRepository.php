@@ -15,7 +15,7 @@ class EventManageRepository implements EventManageRepositoryInterface
 
     public function getAllEvent()
     {
-        return $this->model->where('IsApproved', 1)->get();
+        return $this->model->where('IsApproved', 1)->with(['organizer', 'eventType'])->get();    
     }
 
     public function create(array $data)
@@ -60,6 +60,25 @@ class EventManageRepository implements EventManageRepositoryInterface
     public function getEventByID($eventID)
     {
         return $this->model->find($eventID);
+    }
+
+    public function filterEvents($startDate = null, $eventTypeID = null, $departmentID = null)
+    {
+        $query = $this->model->where('IsApproved', 1)->with(['organizer', 'eventType'])->get();    
+
+        if ($startDate) {
+            $query->whereDate('StartDate', '>=', $startDate);
+        } 
+
+        if ($eventTypeID) {
+            $query->where('EventTypeID', $eventTypeID);
+        }
+
+        if ($departmentID) {
+            $query->where('DepartmentID', $departmentID);
+        }
+
+        return $query->get();
     }
 }
 ?>

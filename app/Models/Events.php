@@ -26,4 +26,14 @@ class Events extends Model
         'Participant',
         'IsApproved',
     ];
+
+    public function eventType()
+    {
+        return $this->belongsTo(EventTypes::class, 'EventTypeID', 'EventTypeID');    
+    }
+
+    public function organizer()
+    {
+        return $this->belongsTo(Account::class, 'OrganizerID', 'UserID');
+    }
 }

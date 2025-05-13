@@ -7,6 +7,7 @@ use App\Services\Interfaces\AdminProfileServiceInterface;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 
 class AdminProfileController extends Controller
 {
@@ -25,17 +26,16 @@ class AdminProfileController extends Controller
             return redirect()->route('login.login');
         }
 
-        return view('admin.contacts-profile', ['user' => $user]);  
+        return view('contacts-profile', ['user' => $user]);  
     }
 
     public function update(Request $request, $userID)
     {
         $validator = Validator::make($request->all(), [
             'UserName' => 'string',
-            'StudentCode' => 'string',
             'Email' => 'email',
             'PhoneNumber' => 'string',
-            'FullName' => 'string',
+            'dob' => 'string',
             'Avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
         ]);
 
@@ -43,23 +43,21 @@ class AdminProfileController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        if ($request->hasFile('Avatar')) {
-            $avatarPath = $request->file('Avatar')->store('img', 'public');
-        }
-
         $data = $request->only([
             'UserName',
-            'StudentCode',
             'Email',
             'PhoneNumber',
-            'FullName',
+            'dob',
             'Avatar'
         ]);
 
-        $data['Avatar'] = $avatarPath;
+        if ($request->hasFile('Avatar')) {
+            $avatarPath = $request->file('Avatar')->store('images', 'public');
+            $data['Avatar'] = $avatarPath;
+        }
 
         $this->adminProfileService->updateProfile($userID, $data);
-        return redirect()->route('admin_profile');
+        return redirect()->to('contacts-profile');
     }
 
     public function changePassword(Request $request)
@@ -69,6 +67,12 @@ class AdminProfileController extends Controller
             'newPassword' => 'required|string',
             'confirmPassword' => 'required|string|same:newPassword'
         ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->currentPassword, $user->Password)) {
+        return back()->withErrors(['currentPassword' => 'Current password is incorrect!']);
+       }
 
         $userID = Auth::id();
         $result = $this->adminProfileService->changePassword($userID, $request->currentPassword, $request->newPassword, $request->confirmPassword);

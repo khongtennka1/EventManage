@@ -31,22 +31,6 @@ class AdminProfileRepository implements AdminProfileRepositoryInterface
         return null;
     }
 
-    // public function removeAvatar($UserID)
-    // {
-    //     $user = Account::find($UserID);
-        
-    //     if ($user && $user->Avatar){
-    //         $avatarPath = public_path($user->Avatar);
-
-    //         if (file_exists($avatarPath)){
-    //             unlink($avatarPath);
-    //         }
-
-    //         $user->Avatar = null;
-    //         $user->save();
-    //     }
-    // }
-
     public function changePassword($userID, $currentPassword, $newPassword, $confirmPassword)
     {
         $user = $this->model->find($userID);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\EventManageServiceInterface;
 use Illuminate\Support\Facades\Validator;
+use App\Models\EventTypes;
 
 class EventManageController extends Controller
 {
@@ -20,12 +21,7 @@ class EventManageController extends Controller
     {
         $events =  $this->eventManageService->getAllEvent();
 
-        return view('admin.event_manage', compact('events'));
-    }
-
-    public function add()
-    {
-        return view('admin.create_event');
+        return view('event-list', compact('events'));
     }
 
     public function create(Request $request)
@@ -69,10 +65,10 @@ class EventManageController extends Controller
         $result = $this->eventManageService->create($data);
 
         if ($result) {
-            return redirect()->route('event_manage');
+            return redirect()->route('event-list');
         }
 
-        return redirect()->route('event_manage')->with('error', 'Tạo sự kiện thất bai!');
+        return redirect()->route('event-list')->with('error', 'Tạo sự kiện thất bai!');
     }
 
     public function show($eventID)
@@ -80,21 +76,10 @@ class EventManageController extends Controller
         $event = $this->eventManageService->show($eventID);
 
         if (!$event) {
-            return redirect()->route('event_manage')->with('error', 'Sự kiện không tồn tại!');
+            return redirect()->route('event-list')->with('error', 'Sự kiện không tồn tại!');
         }
 
-        return view('admin.event_detail', compact('event'));
-    }
-
-    public function edit($eventID)
-    {
-        $event = $this->eventManageService->getEventByID($eventID);
-
-        if (!$event) {
-            return redirect()->route('event_manage')->with('error', 'Sự kiện không tồn tại!');
-        }
-
-        return view('admin.edit_event', compact('event'));
+        return view('event-details', compact('event'));
     }
 
     public function update(Request $request, $eventID)
@@ -111,8 +96,6 @@ class EventManageController extends Controller
             'Points' => 'int',
             'Participant' => 'int',
         ]);
-
-        $imagePath = $request->file('ImageURL')->store('img', 'public');
 
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
@@ -131,15 +114,18 @@ class EventManageController extends Controller
             'Participant',
         ]);
 
-        $data['ImageURL'] = $imagePath;
+        if ($request->hasFile('ImageURL')) {
+            $imagePath = $request->file('ImageURL')->store('img', 'public');
+            $data['ImageURL'] = $imagePath;
+        }
 
         $result = $this->eventManageService->update($eventID, $data);
 
         if ($result) {
-            return redirect()->route('event_manage');
+            return redirect()->route('event-list');
         }
 
-        return redirect()->route('event_manage')->with('error', 'Cập nhật sự kiện thất bại!');
+        return redirect()->route('event-list')->with('error', 'Cập nhật sự kiện thất bại!');
     }
 
     public function delete($eventID)
@@ -147,10 +133,10 @@ class EventManageController extends Controller
         $result = $this->eventManageService->delete($eventID);
 
         if ($result) {
-            return redirect()->route('event_manage');
+            return redirect()->route('event-list');
         }
 
-        return redirect()->route('event_manage')->with('error', 'Xóa sự kiện thất bại!');
+        return redirect()->route('event_list')->with('error', 'Xóa sự kiện thất bại!');
     }
 
     public function find(Request $request)
@@ -164,4 +150,20 @@ class EventManageController extends Controller
 
         return response()->json(['error' => 'Sự kiện không tồn tại!'], 404);
     }
+
+    public function filterEvents(Request $request)
+    {
+        $startDate = $request->input('StartDate');
+        $eventTypeID = $request->input('EventTypeID');
+        $departmentID = $request->input('departmentID');
+
+        $events = $this->eventManageService->filterEvents($startDate, $eventTypeID, $departmentID);
+
+        $eventTypes = EventTypes::all();
+        // $departments = Department::all();
+
+        return view('event-list', compact('events', 'eventTypes', 'departments'));
+    }
 }
+
+

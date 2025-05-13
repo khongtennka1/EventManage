@@ -32,5 +32,22 @@ class UserManageRepository implements UserManageRepositoryInterface
 
         return $user ? $user->delete() : false;
     }
+
+    public function update($userID, $data)
+    {
+        $user = $this->model->find($userID);
+
+        if ($user) {
+            $user->update($data);
+            return true;
+        }
+
+        return false;
+    }
+
+    public function create($data)
+    {
+        return $this->model->create($data);
+    }
 }
 ?>

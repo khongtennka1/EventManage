@@ -27,5 +27,15 @@ class UserManageService implements UserManageServiceInterface
     {
         return $this->userManageRepo->delete($userID);
     }
+
+    public function update($userID, $data)
+    {
+        return $this->userManageRepo->update($userID, $data);
+    }
+
+    public function create($data)
+    {
+        return $this->userManageRepo->create($data);
+    }
 }
 ?>

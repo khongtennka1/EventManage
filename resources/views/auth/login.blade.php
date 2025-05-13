@@ -1,12 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master-without-nav')
 
-<head>
-    @extends('admin.layouts.head')
-</head>
+@section('title')
+@lang('translation.Login')
+@endsection
 
-<body>
-    <div class="account-pages my-5 pt-sm-5">
+@section('css')
+<!-- owl.carousel css -->
+    <link rel="stylesheet" href="{{ URL::asset('build/libs/owl.carousel/assets/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ URL::asset('build/libs/owl.carousel/assets/owl.theme.default.min.css') }}">
+@endsection
+
+@section('body')
+
+<body class="auth-body-bg">
+    @endsection
+
+    @section('content')
+
+     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-5">
@@ -127,7 +138,10 @@
         </div>
     </div>
 
-    <script src="{{ asset('assets/js/app.js') }}"></script>
-</body>
-
-</html>
+    @endsection
+    @section('script')
+    <!-- owl.carousel js -->
+    <script src="{{ URL::asset('build/libs/owl.carousel/owl.carousel.min.js') }}"></script>
+    <!-- auth-2-carousel init -->
+    <script src="{{ URL::asset('build/js/pages/auth-2-carousel.init.js') }}"></script>
+    @endsection

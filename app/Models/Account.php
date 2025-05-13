@@ -23,9 +23,16 @@ class Account extends Authenticatable
         'Role',
         'PhoneNumber',
         'FullName',
+        'dob',
         'Avatar',       
+        'Address',
     ];
     public $timestamps = false;
+
+    public function events()
+    {
+        return $this->hasMany(Events::class, 'OrganizerID');
+    }
 
     public function getAuthPassword()
     {

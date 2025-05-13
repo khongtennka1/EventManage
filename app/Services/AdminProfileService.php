@@ -24,14 +24,7 @@ class AdminProfileService implements AdminProfileServiceInterface
     {
         return $this->adminProfileRepo->update($userID, $data);
 
-        // if($request->hasFile('Avatar')){
-        // }
     }
-
-    // public function removeAvatar($UserID)
-    // {
-    //     $this->adminProfileRepo->removeAvatar($UserID);
-    // }
 
     public function changePassword($userID, $currentPassword, $newPassword, $confirmPassword)
     {

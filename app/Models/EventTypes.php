@@ -9,11 +9,16 @@ class EventTypes extends Model
 {
     use HasFactory;
     
-    protected $table = 'EventTypes';
+    protected $table = 'event_types';
     protected $primarykey = 'EventTypeID';
     
     protected $fillable = [
-        'TypeName',
+        'EventTypeName',
         'Description'
     ];
+
+    public function events()
+    {
+        return $this->hasMany(Events::class, 'EventTypeID');
+    }
 }
