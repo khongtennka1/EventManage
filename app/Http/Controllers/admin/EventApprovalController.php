@@ -23,7 +23,7 @@ class EventApprovalController extends Controller
             return response()->json(['message' => 'No events found for approval.'], 404);
         }
 
-        return view('admin.event_approval', ['events' => $event]);
+        return view('event-apply', ['events' => $event]);
     }
 
     public function eventApprovalHandler(Request $request, $eventID)
@@ -32,12 +32,12 @@ class EventApprovalController extends Controller
 
         if ($isApproved == '1') {
             $this->eventApprovalService->approval($eventID, 1);
-            return redirect()->route('event_manage')->with('success', 'Event approved successfully.');
+            return redirect()->route('event-list')->with('success', 'Event approved successfully.');
         } elseif ($isApproved == '0') {
             $this->eventApprovalService->approval($eventID, 0);
-            return redirect()->route('event_manage')->with('success', 'Event rejected successfully.');
+            return redirect()->route('event_list')->with('success', 'Event rejected successfully.');
         } else {
-            return redirect()->route('event_manage')->with('error', 'Invalid approval status.');
+            return redirect()->route('event_list')->with('error', 'Invalid approval status.');
         }
     }
 }

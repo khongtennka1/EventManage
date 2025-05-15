@@ -50,7 +50,7 @@
                                 <select name="event_type_id" class="form-select">
                                     <option value="">Select Type</option>
                                     @foreach ($eventTypes as $type)
-                                        <option value="{{ $type->id }}" {{ request('event_type_id') == $type->id ? 'selected' : '' }}>
+                                        <option value="{{ $type->EventTypeID }}" {{ request('event_type_id') == $type->EventTypeID ? 'selected' : '' }}>
                                             {{ $type->EventTypeName }}
                                         </option>
                                     @endforeach
@@ -72,13 +72,8 @@
                                 <tr>
                                     <th scope="col">No</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col">Location</th>
-                                    <th scope="col">Point</th>
-                                    <th scope="col">Organizer</th>
                                     <th scope="col">Type</th>
-                                    <th scope="col">Participant</th>
                                     <th scope="col">Start Date</th>
-                                    <th scope="col">End Date</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Action</th>
@@ -89,15 +84,10 @@
                                     <tr>
                                         <td>{{ $event->EventID }}</td>
                                         <td>{{ $event->EventName }}</td>
-                                        <td>{{ $event->Location }}</td>
-                                        <td>{{ $event->Points }}</td>
-                                        <td>{{ $event->organizer->UserName }}</td>
-                                        <td>{{ $event->eventType->EventTypeName }}</td>
-                                        <td>{{ $event->Participant }}</td>
+                                        <td>{{ $event->eventType->EventName }}</td>
                                         <td>{{ $event->StartDate }}</td>
-                                        <td>{{ $event->EndDate }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $event->ImageURL) }}" alt="{{ $event->EventName }}" style="max-width: 30px; max-height: 30px;">
+                                            <img src="{{ asset('storage/' . $event->ImageURL) }}" alt="{{ $event->EventName }}" style="max-width: 50px; max-height: 50px;">
                                         </td>
                                         <td><span class="badge bg-success">{{ $event->status }}</span></td>
                                         <td>
@@ -112,7 +102,7 @@
                                                 </button>
                                             </form>
 
-                                            <a href="{{ route('eventDetails', $event->EventID) }}" class="btn btn-info btn-sm">Show</a>
+                                            <a href="{{ route('event-details', $event->EventID) }}" class="btn btn-info btn-sm">Show</a>
                                         </td>
                                     </tr>
 
@@ -177,6 +167,30 @@
                                                         </div>
 
                                                         <div class="mb-3">
+                                                            <label for="institutename" class="form-label">Institute Name</label>
+                                                            <select name="InstituteID" id="institutename" class="form-control" onchange="updateDepartments()">
+                                                                <option value="">Select Institute</option>
+                                                                    @foreach($institutes as $institute)
+                                                                        <option value="{{ $institute->InstituteID }}" data-faculty="{{ $institute->InstituteID }}">
+                                                                            {{ $institute->InstituteName }}
+                                                                        </option>
+                                                                    @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="departmentname" class="form-label">Department Name</label>
+                                                            <select name="DepartmentID" id="departmentname" class="form-control">
+                                                                <option value="">Select Department</option>
+                                                                    @foreach($departments as $department)
+                                                                        <option value="{{ $department->DepartmentID }}" data-faculty="{{ $department->DepartmentID }}">
+                                                                            {{ $department->DepartmentName }}
+                                                                        </option>
+                                                                    @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
                                                             <label for="participant" class="form-label">Participant</label>
                                                             <input type="number" class="form-control @error('Participant') is-invalid @enderror" id="participant" name="Participant" value="{{ $event->Participant }}" required>
                                                             @error('Participant')
@@ -221,7 +235,7 @@
                                                                 <label class="input-group-text" for="avatar">Upload</label>
                                                             </div>
                                                             <div class="text-start mt-2">
-                                                                <img src="{{ !empty($event->ImageURL) ? asset('storage/' . $event->ImageURL) : '' }}" alt="" class="avatar-lg">
+                                                                <img src="{{ !empty($event->ImageURL) ? asset('storage/' . $event->ImageURL) : '' }}" alt="" class="avatar-lg" >
                                                             </div>
                                                             @error('ImageURL')
                                                                 <span class="invalid-feedback" role="alert">
@@ -312,13 +326,37 @@
                                 <option value="1">Ngày hội thể thao</option>
                                 <option value="2">Chương trình tình nguyện</option>
                                 <option value="3">Chương trình giao lưu</option>
-                                <option value="2">Họp lớp</option>
+                                <option value="4">Họp lớp</option>
                             </select>
                             @error('EventTypeID')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="institutename" class="form-label">Institute Name</label>
+                            <select name="InstituteID" id="institutename" class="form-control" onchange="updateDepartments()">
+                                <option value="">Select Institute</option>
+                                    @foreach($institutes as $institute)
+                                        <option value="{{ $institute->InstituteID }}" data-faculty="{{ $institute->InstituteID }}">
+                                            {{ $institute->InstituteName }}
+                                        </option>
+                                    @endforeach
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="departmentname" class="form-label">Department Name</label>
+                            <select name="DepartmentID" id="departmentname" class="form-control">
+                                <option value="">Select Department</option>
+                                    @foreach($departments as $department)
+                                        <option value="{{ $department->DepartmentID }}" data-faculty="{{ $department->DepartmentID }}">
+                                            {{ $department->DepartmentName }}
+                                        </option>
+                                    @endforeach
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -386,4 +424,22 @@
     
     <!-- Job List Initialization -->
     <script src="{{ URL::asset('build/js/pages/job-list.init.js') }}"></script>
+
+    <script>
+    function updateDepartments() {
+        var instituteID = document.getElementById('institutename').value;
+        var departmentSelect = document.getElementById('departmentname');
+
+        departmentSelect.innerHTML = '<option value="">Select Department</option>';
+
+        @foreach($departments as $department)
+            if ("{{ $department->InstituteID }}" === instituteID) {
+                var option = document.createElement('option');
+                option.value = "{{ $department->DepartmentID }}";
+                option.textContent = "{{ $department->DepartmentName }}";
+                departmentSelect.appendChild(option);
+            }
+        @endforeach
+    }
+</script>
 @endsection

@@ -3,13 +3,13 @@
 namespace App\Repositories;
 
 use App\Repositories\Interfaces\EventApprovalRepositoryInterface;
-use App\Models\Events;
+use App\Models\Event;
 
 class EventApprovalRepository implements EventApprovalRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Events $event) {
+    public function __construct(Event $event) {
         $this->model = $event;
     }
 
@@ -25,6 +25,18 @@ class EventApprovalRepository implements EventApprovalRepositoryInterface
         if ($event) {
             $event->IsApproved = $isApproved;
             $event->update();
+            return true;
+        }
+
+        return false;
+    }
+
+    public function delete($eventID)
+    {
+        $event = $this->model->find($eventID);
+        
+        if ($event) {
+            $event->delete();
             return true;
         }
 

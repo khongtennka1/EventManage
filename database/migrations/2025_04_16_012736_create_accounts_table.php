@@ -23,6 +23,15 @@ return new class extends Migration
             $table->integer('Points')->default(0);
             $table->integer('IsActive')->default(1);
             $table->integer('Role')->default(0);
+            $table->string('PhoneNumber');
+            $table->string('FullName');
+            $table->string('Avatar');
+            $table->dateTime('dob');
+            $table->string('Address');
+            $table->string('ClassName');
+            $table->unsignedBigInteger('DepartmentID');
+
+            $table->foreign('DepartmentID')->references('DepartmentID')->on('departments');
             $table->timestamps(); 
         });
     }

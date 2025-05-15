@@ -48,8 +48,7 @@
                     </div>
                     <!-- end row -->
                     <div class="table-responsive">
-                        <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100"
-                            id="userList-table">
+                        <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100" id="userList-table">
                             <thead class="table-light">
                                 <tr>
                                     <th scope="col" style="width: 40px;">#</th>
@@ -58,35 +57,33 @@
                                     <th scope="col">Student Code</th>
                                     <th scope="col">Phone</th>
                                     <th scope="col">Address</th>
+                                    <th scope="col">Department Name</th>
+                                    <th scope="col">Class Name</th>
                                     <th scope="col">Date of Birth</th>
-                                    <th scope="col">Point</th>
+                                    <th scope="col">Points</th>
                                     <th scope="col" style="width: 200px;">Action</th>
                                 </tr>
                             </thead>
-
                             <tbody>
                                 @foreach ($users as $user)
                                     <tr>
                                         <td>
-                                            <img src="{{ asset('storage/' . $user->Avatar) }}" alt="Avatar"
-                                                class="rounded-circle" style="height: 40px;">
+                                            <img src="{{ asset('storage/' . $user->Avatar) }}" alt="Avatar" class="rounded-circle" style="height: 40px;">
                                         </td>
                                         <td>{{ $user->FullName }}</td>
                                         <td>{{ $user->Email }}</td>
                                         <td>{{ $user->StudentCode }}</td>
                                         <td>{{ $user->PhoneNumber }}</td>
                                         <td>{{ $user->Address }}</td>
+                                        <td>{{ $user->department->DepartmentName ?? 'N/A' }}</td>
+                                        <td>{{ $user->ClassName }}</td>
                                         <td>{{ $user->dob }}</td>
                                         <td>{{ $user->Points }}</td>
-
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                                                data-bs-target="#editProfileModal{{ $user->UserID }}">
+                                            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal{{ $user->UserID }}">
                                                 <i class='bx bxs-edit'></i> Edit
                                             </button>
-
-                                            <form action="{{ route('delete_user', $user->UserID) }}" method="POST"
-                                                onsubmit="return confirmDelete();" style="display: inline;">
+                                            <form action="{{ route('delete_user', $user->UserID) }}" method="POST" onsubmit="return confirmDelete();" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm btn-danger">
@@ -194,9 +191,45 @@
                                                         </div>
 
                                                         <div class="mb-3">
+                                                            <label for="institutename" class="form-label">Institute Name</label>
+                                                            <select name="InstituteID" id="institutename" class="form-control" onchange="updateDepartments()">
+                                                                <option value="">Select Institute</option>
+                                                                @foreach($institutes as $institute)
+                                                                    <option value="{{ $institute->InstituteID }}" data-faculty="{{ $institute->InstituteID }}">
+                                                                        {{ $institute->InstituteName }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="departmentname" class="form-label">Department Name</label>
+                                                            <select name="DepartmentID" id="departmentname" class="form-control">
+                                                                <option value="">Select Department</option>
+                                                                @foreach($departments as $department)
+                                                                    <option value="{{ $department->DepartmentID }}" data-faculty="{{ $department->DepartmentID }}">
+                                                                        {{ $department->DepartmentName }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="class" class="form-label">Class Name</label>
+                                                            <input type="text" class="form-control @error('ClassName') is-invalid @enderror"
+                                                                value="{{ $user->ClassName }}" id="class"
+                                                                name="ClassName" autofocus placeholder="Enter class">
+                                                            @error('ClassName')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="mb-3">
                                                             <label for="userdob">Date of Birth</label>
                                                             <div class="input-group" id="datepicker1">
-                                                                <input type="text"
+                                                                <input type="date"
                                                                     class="form-control @error('dob') is-invalid @enderror"
                                                                     placeholder="dd-mm-yyyy" data-date-format="dd-mm-yyyy"
                                                                     data-date-container='#datepicker1'
@@ -263,8 +296,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('create_user') }}" method="POST" class="form-horizontal"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('create_user') }}" method="POST" class="form-horizontal" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-lg-12">
@@ -358,6 +390,42 @@
                                         </span>
                                     @enderror
                                 </div>
+                                
+                                <div class="mb-3">
+                                    <label for="institutename" class="form-label">Institute Name</label>
+                                    <select name="InstituteID" id="institutename" class="form-control" onchange="updateDepartments()">
+                                        <option value="">Select Institute</option>
+                                            @foreach($institutes as $institute)
+                                                <option value="{{ $institute->InstituteID }}" data-faculty="{{ $institute->InstituteID }}">
+                                                    {{ $institute->InstituteName }}
+                                                </option>
+                                            @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="departmentname" class="form-label">Department Name</label>
+                                    <select name="DepartmentID" id="departmentname" class="form-control">
+                                        <option value="">Select Department</option>
+                                            @foreach($departments as $department)
+                                                <option value="{{ $department->DepartmentID }}" data-faculty="{{ $department->DepartmentID }}">
+                                                    {{ $department->DepartmentName }}
+                                                </option>
+                                            @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="class-input" class="form-label">Class Name</label>
+                                    <input type="text" class="form-control @error('ClassName') is-invalid @enderror"
+                                        name="ClassName" id="class-input" placeholder="Enter class" value="{{ old('ClassName') }}" required />
+                                    @error('ClassName')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="mb-3">
                                     <label for="dob-input" class="form-label">Date of Birth</label>
                                     <input type="date" name="dob" id="dob-input"
@@ -417,10 +485,7 @@
     <!-- end newContactModal -->
 @endsection
 @section('script')
-    <!-- select2 js -->
     <script src="{{ URL::asset('build/libs/select2/js/select2.min.js') }}"></script>
-
-    <!-- ecommerce-customer-list init -->
     <script src="{{ URL::asset('build/js/pages/contact-user-list.init.js') }}"></script>
 
     <script>
@@ -428,4 +493,22 @@
             return confirm('Bạn có chắc chắn muốn xoá người dùng này!');
         }
     </script>
+
+    <script>
+    function updateDepartments() {
+        var instituteID = document.getElementById('institutename').value;
+        var departmentSelect = document.getElementById('departmentname');
+
+        departmentSelect.innerHTML = '<option value="">Select Department</option>';
+
+        @foreach($departments as $department)
+            if ("{{ $department->InstituteID }}" === instituteID) {
+                var option = document.createElement('option');
+                option.value = "{{ $department->DepartmentID }}";
+                option.textContent = "{{ $department->DepartmentName }}";
+                departmentSelect.appendChild(option);
+            }
+        @endforeach
+    }
+</script>
 @endsection

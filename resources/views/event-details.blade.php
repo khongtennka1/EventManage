@@ -19,39 +19,35 @@
                     <table class="table">
                         <tbody>
                             <tr>
-                                <th scope="col">Job Title</th>
-                                <td scope="col">Magento Developer</td>
+                                <th scope="row">Event Name</th>
+                                <td>{{ $event->EventName }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Experience:</th>
-                                <td>0-2 Years</td>
+                                <th scope="row">Location</th>
+                                <td>{{ $event->Location }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Vacancy</th>
-                                <td>12</td>
+                                <th scope="row">Event Type</th>
+                                <td>{{ $event->eventType->EventName }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Job Type</th>
-                                <td><span class="badge badge-soft-success">Full Time</span></td>
+                                <th scope="row">Participant</th>
+                                <td><span class="badge badge-soft-success">{{ $event->Participant }}</span></td>
                             </tr>
                             <tr>
-                                <th scope="row">Status</th>
-                                <td><span class="badge badge-soft-info">New</span></td>
+                                <th scope="row">Point</th>
+                                <td><span class="badge badge-soft-info">{{ $event->Points }}</span></td>
                             </tr>
                             <tr>
-                                <th scope="row">Posted Date</th>
-                                <td>25 June, 2022</td>
+                                <th scope="row">Start Date</th>
+                                <td>{{ $event->StartDate }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">Close Date</th>
-                                <td>13 April, 2022</td>
+                                <th scope="row">End Date</th>
+                                <td>{{ $event->EndDate }}</td>
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="hstack gap-2">
-                    <button class="btn btn-soft-primary w-100">Apply Now</button>
-                    <button class="btn btn-soft-danger w-100">Contact Us</button>
                 </div>
             </div>
         </div>
@@ -59,9 +55,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center">
-                    <img src="{{URL::asset('build/images/companies/adobe-photoshop.svg')}}" alt="" height="50" class="mx-auto d-block">
-                    <h5 class="mt-3 mb-1">Themesbrand</h5>
-                    <p class="text-muted mb-0">Since July 2017</p>
+                    <img src="{{ asset('storage/' . $event->organizer->Avatar) }}" alt="" height="50" class="mx-auto d-block">
+                    <h5 class="mt-3 mb-1">{{ $event->organizer->FullName }}</h5>
+                    <p class="text-muted mb-0">{{ \Carbon\Carbon::parse($event->organizer->CreatedAt)->format('d-m-Y') }}</p>
                 </div>
 
                 <ul class="list-unstyled mt-4">
@@ -70,7 +66,7 @@
                             <i class="bx bx-phone text-primary fs-4"></i>
                             <div class="ms-3">
                                 <h6 class="fs-14 mb-2">Phone</h6>
-                                <p class="text-muted fs-14 mb-0">+589 560 56555</p>
+                                <p class="text-muted fs-14 mb-0">{{ $event->organizer->PhoneNumber }}</p>
                             </div>
                         </div>
                     </li>
@@ -79,16 +75,7 @@
                             <i class="bx bx-mail-send text-primary fs-4"></i>
                             <div class="ms-3">
                                 <h6 class="fs-14 mb-2">Email</h6>
-                                <p class="text-muted fs-14 mb-0">themesbrand@gmail.com</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="mt-3">
-                        <div class="d-flex">
-                            <i class="bx bx-globe text-primary fs-4"></i>
-                            <div class="ms-3">
-                                <h6 class="fs-14 mb-2">Website</h6>
-                                <p class="text-muted fs-14 text-break mb-0">www.themesbrand.com</p>
+                                <p class="text-muted fs-14 mb-0">{{ $event->organizer->Email }}</p>
                             </div>
                         </div>
                     </li>
@@ -96,14 +83,14 @@
                         <div class="d-flex">
                             <i class="bx bx-map text-primary fs-4"></i>
                             <div class="ms-3">
-                                <h6 class="fs-14 mb-2">Location</h6>
-                                <p class="text-muted fs-14 mb-0">Oakridge Lane Richardson.</p>
+                                <h6 class="fs-14 mb-2">Address</h6>
+                                <p class="text-muted fs-14 mb-0">{{ $event->organizer->Address }}</p>
                             </div>
                         </div>
                     </li>
                 </ul>
                 <div class="mt-4">
-                    <a href="#!" class="btn btn-soft-primary btn-hover w-100 rounded"><i class="mdi mdi-eye"></i> View Profile</a>
+                    <a href="{{ route('contacts-profile') }}" class="btn btn-soft-primary btn-hover w-100 rounded"><i class="mdi mdi-eye"></i> View Profile</a>
                 </div>
             </div>
         </div>
@@ -113,15 +100,15 @@
         <div class="card">
             <div class="card-body border-bottom">
                 <div class="d-flex">
-                    <img src="{{URL::asset('build/images/companies/wechat.svg')}}" alt="" height="50">
+                    <img src="{{ asset('storage/' . $event->ImageURL) }}" alt="" height="50">
                     <div class="flex-grow-1 ms-3">
-                        <h5 class="fw-semibold">Magento Developer</h5>
+                        <h5 class="fw-semibold">{{ $event->organizer->DepartmentName }}</h5>
                         <ul class="list-unstyled hstack gap-2 mb-0">
                             <li>
                                 <i class="bx bx-building-house"></i> <span class="text-muted">Themesbrand</span>
                             </li>
                             <li>
-                                <i class="bx bx-map"></i> <span class="text-muted">California</span>
+                                <i class="bx bx-map"></i> <span class="text-muted">{{ $event->Location }}</span>
                             </li>
                         </ul>
                     </div>
@@ -129,7 +116,7 @@
             </div>
             <div class="card-body">
                 <h5 class="fw-semibold mb-3">Description</h5>
-                <p class="text-muted">We are looking to hire a skilled Magento developer to build and maintain eCommerce websites for our clients. As a Magento developer, you will be responsible for liaising with the design team, setting up Magento 1x and 2x sites, building modules and customizing extensions, testing the performance of each site, and maintaining security and feature updates after the installation is complete.</p>
+                <p class="text-muted">{{ $event->Description }}</p>
 
                 <h5 class="fw-semibold mb-3">Responsibilities:</h5>
                 <ul class="vstack gap-3">
@@ -251,6 +238,4 @@
 <!--end row-->
 
 @endsection
-@section('script')
-<script src="{{URL::asset('build/js/app.js')}}"></script>
-@endsection
+

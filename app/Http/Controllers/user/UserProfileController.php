@@ -25,7 +25,7 @@ class UserProfileController extends Controller
             return redirect()->route('login.login');
         }
 
-        return view('user.user_profile', ['user' => $user]);
+        return view('user.profile', ['user' => $user]);
     }
 
     public function update(Request $request, $userID)
@@ -37,6 +37,7 @@ class UserProfileController extends Controller
             'PhoneNumber' => 'string',
             'FullName' => 'string',
             'Avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'Gender' => 'string'
         ]);
 
         if ($validator->fails()) {
@@ -45,6 +46,7 @@ class UserProfileController extends Controller
 
         if ($request->hasFile('Avatar')) {
             $avatarPath = $request->file('Avatar')->store('img', 'public');
+            $data['Avatar'] = $avatarPath;
         }
 
         $data = $request->only([
@@ -53,13 +55,12 @@ class UserProfileController extends Controller
             'Email',
             'PhoneNumber',
             'FullName',
-            'Avatar'
+            'Avatar',
+            'Gender',
         ]);
 
-        $data['Avatar'] = $avatarPath;
-
         $this->userProfileService->updateProfile($userID, $data);
-        return redirect()->route('userProfile');
+        return redirect()->route('user-profile');
     }
 
     public function changePassword(Request $request)
@@ -78,22 +79,5 @@ class UserProfileController extends Controller
         }
 
         return back()->withErrors(['currentPassword' => 'Current password is incorrect!']);
-    }
-
-    public function delete(Request $request)
-    {
-        $request->validate([
-            'confirmPasswordDelete' => 'required|string', 
-        ]);
-
-        $userID = Auth::id();
-        $password = $request->input('confirmPasswordDelete');
-
-        if ($this->userProfileService->delete($userID, $password)) {
-            return redirect()->route('user.dashboard');
-        } 
-
-        return redirect()->route('userProfile');
-
     }
 }

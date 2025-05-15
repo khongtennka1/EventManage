@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EventTypes extends Model
+class EventType extends Model
 {
     use HasFactory;
     
@@ -19,6 +19,6 @@ class EventTypes extends Model
 
     public function events()
     {
-        return $this->hasMany(Events::class, 'EventTypeID');
+        return $this->hasMany(Event::class, 'EventTypeID');
     }
 }

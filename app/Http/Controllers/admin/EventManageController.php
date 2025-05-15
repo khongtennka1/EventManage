@@ -6,8 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\EventManageServiceInterface;
 use Illuminate\Support\Facades\Validator;
-use App\Models\EventTypes;
-
+use App\Models\EventType;
+use App\Models\Department;
+use App\Models\Institute;
 class EventManageController extends Controller
 {
     protected $eventManageService;
@@ -20,8 +21,11 @@ class EventManageController extends Controller
     public function getAllEvent()
     {
         $events =  $this->eventManageService->getAllEvent();
+        $eventTypes = EventType::all();
+        $departments = Department::all();
+        $institutes = Institute::all();
 
-        return view('event-list', compact('events'));
+        return view('event-list', compact('events', 'eventTypes', 'departments', 'institutes'));
     }
 
     public function create(Request $request)
@@ -32,6 +36,8 @@ class EventManageController extends Controller
             'ImageURL' => 'required|image|mimes:jpg,jpeg,png,gif|max:51200',
             'Location' => 'required|string',
             'EventTypeID' => 'required|int',
+            'DepartmentID' => 'exists:departments,DepartmentID',
+            'InstituteID' => 'exists:institutes,InstituteID',
             'StartDate' => 'required|date',
             'EndDate' => 'required|date|after: StartDate',
             'IsMandatory' => 'required|int',
@@ -51,6 +57,8 @@ class EventManageController extends Controller
             'ImageURL',
             'Location',
             'EventTypeID',
+            'DepartmentID',
+            'InstituteID',
             'StartDate',
             'EndDate',
             'IsMandatory',
@@ -90,6 +98,8 @@ class EventManageController extends Controller
             'ImageURL' => 'image|mimes:jpg,jpeg,png,gif|max:51200',
             'Location' => 'string',
             'EventTypeID' => 'int',
+            'DepartmentID' => 'exists:departments,DepartmentID',
+            'InstituteID' => 'exists:institutes,InstituteID',
             'StartDate' => 'date',
             'EndDate' => 'date|after: StartDate',
             'IsMandatory' => 'int',
@@ -107,6 +117,8 @@ class EventManageController extends Controller
             'ImageURL',
             'Location',
             'EventTypeID',
+            'DepartmentID',
+            'InstituteID',
             'StartDate',
             'EndDate',
             'IsMandatory',
@@ -159,7 +171,7 @@ class EventManageController extends Controller
 
         $events = $this->eventManageService->filterEvents($startDate, $eventTypeID, $departmentID);
 
-        $eventTypes = EventTypes::all();
+        $eventTypes = EventType::all();
         // $departments = Department::all();
 
         return view('event-list', compact('events', 'eventTypes', 'departments'));

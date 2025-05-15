@@ -28,8 +28,11 @@ return new class extends Migration
             $table->dateTime('CreateAt')->useCurrent();
             $table->dateTime('ConfirmationTime')->nullable(); 
             $table->integer('Participant')->default(0); 
-            $table->boolean('CheckInRequired')->default(false);
+            $table->integer('CheckInRequired')->default(0);
+            $table->integer('IsApproved')->default(0);
+            $table->unsignedBigInteger('DepartmentID');
 
+            $table->foreign('DepartmentID')->references('DepartmentID')->on('departments');
             $table->foreign('EventTypeID')->references('EventTypeID')->on('event_types');
             $table->foreign('OrganizerID')->references('UserID')->on('account');
 

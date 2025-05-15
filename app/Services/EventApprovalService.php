@@ -22,5 +22,10 @@ class EventApprovalService implements EventApprovalServiceInterface
     {
         return $this->eventApprovalRepo->approval($eventID, $isApproved);
     }
+
+    public function delete($eventID)
+    {
+        return $this->eventApprovalRepo->delete($eventID);
+    }
 }
 ?>

@@ -29,197 +29,48 @@
                 <div class="table-responsive">
                     <table class="table table-bordered align-middle nowrap">
                         <thead>
-                            <tr>
+                           <tr>
                                 <th scope="col">No</th>
-                                <th scope="col">Job Title</th>
-                                <th scope="col">Company Name</th>
+                                <th scope="col">Title</th>
                                 <th scope="col">Type</th>
-                                <th scope="col">Apply Date</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">Image</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Magento Developer</td>
-                                <td>Creative Agency</td>
-                                <td><span class="badge badge-soft-success">Full Time</span></td>
-                                <td>02 June 2021</td>
-                                <td><span class="badge bg-success">Active</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Apple School & College</td>
-                                <td>Themesbrand</td>
-                                <td><span class="badge badge-soft-danger">Part Time</span></td>
-                                <td>15 June 2021</td>
-                                <td><span class="badge bg-info">New</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Marketing Director</td>
-                                <td>Web Technology pvt.Ltd</td>
-                                <td><span class="badge badge-soft-success">Full Time</span></td>
-                                <td>02 June 2021</td>
-                                <td><span class="badge bg-danger">Close</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">4</th>
-                                <td>HTML Developer</td>
-                                <td>Skote Technology pvt.Ltd</td>
-                                <td><span class="badge badge-soft-success">Full Time</span></td>
-                                <td>02 June 2021</td>
-                                <td><span class="badge bg-success">Active</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">5</th>
-                                <td>Product Sales Specialist</td>
-                                <td>New Technology pvt.Ltd</td>
-                                <td><span class="badge badge-soft-danger">Part Time</span></td>
-                                <td>25 June 2021</td>
-                                <td><span class="badge bg-info">New</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">6</th>
-                                <td>Magento Developer</td>
-                                <td>Themesbrand</td>
-                                <td><span class="badge badge-soft-info">Freelance</span></td>
-                                <td>25 June 2021</td>
-                                <td><span class="badge text-bg-danger">Close</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">7</th>
-                                <td>Magento Developer</td>
-                                <td>Web Technology pvt.Ltd</td>
-                                <td><span class="badge badge-soft-danger">Part Time</span></td>
-                                <td>25 June 2021</td>
-                                <td><span class="badge text-bg-success">Active</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">8</th>
-                                <td>Magento Developer</td>
-                                <td>Web Technology pvt.Ltd</td>
-                                <td><span class="badge badge-soft-success">Full Time</span></td>
-                                <td>02 June 2021</td>
-                                <td><span class="badge text-bg-danger">Close</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">9</th>
-                                <td>Magento Developer</td>
-                                <td>Adobe Agency</td>
-                                <td><span class="badge badge-soft-info">Freelance</span></td>
-                                <td>02 June 2021</td>
-                                <td><span class="badge text-bg-info">New</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">10</th>
-                                <td>Magento Developer</td>
-                                <td>Web Technology pvt.Ltd</td>
-                                <td><span class="badge badge-soft-warning">Internship</span></td>
-                                <td>02 June 2021</td>
-                                <td><span class="badge text-bg-success">Active</span></td>
-                                <td>
-                                    <ul class="list-unstyled hstack gap-1 mb-0">
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                            <a href="job-details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
-                                        </li>
-                                    </ul>
-                                </td>
-                            </tr>
+                            @if (isset($events) && $events->isNotEmpty())
+                                @foreach ($events as $event)
+                                    <tr>
+                                        <td>{{ $event->EventID }}</td>
+                                        <td>{{ $event->EventName }}</td>
+                                        <td>{{ $event->eventType->EventName }}</td>
+                                        <td>{{ $event->StartDate }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $event->ImageURL) }}" alt="{{ $event->EventName }}" style="max-width: 50px; max-height: 50px;">
+                                        </td>
+                                        <td><span class="badge bg-success">{{ $event->status }}</span></td>
+                                        <td>
+                                            <form action="{{ route('eventApprovalHandler', $event->EventID) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                <button type="submit" name="IsApproved" value="1" class="btn btn-success"><i class="bxr bx-check-circle"></i></button>
+                                            </form>
+
+                                            <form action="{{ route('deleteEventHandler', $event->EventID) }}" method="POST" onsubmit="return confirmDelete();" style="display: inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger">
+                                                    <i class="mdi mdi-delete-outline"></i>
+                                                </button>
+                                            </form>
+
+                                            <a href="{{ route('event-details', $event->EventID) }}"><i class="mdi mdi-eye-outline"></i></a>
+                                        </td>
+                                    </tr>                                    
+                                @endforeach
+                            @endif
                         </tbody>
                     </table>
                 </div>

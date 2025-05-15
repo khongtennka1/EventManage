@@ -26,12 +26,25 @@ class Account extends Authenticatable
         'dob',
         'Avatar',       
         'Address',
+        'DepartmentID',
+        'ClassName',
+        'Gender'
     ];
     public $timestamps = false;
 
     public function events()
     {
-        return $this->hasMany(Events::class, 'OrganizerID');
+        return $this->hasMany(Event::class, 'OrganizerID');
+    }
+
+    public function department() 
+    {
+        return $this->belongsTo(Department::class, 'DepartmentID', 'DepartmentID');
+    }
+
+    public function institute()
+    {
+        return $this->belongsTo(Institute::class, 'InstituteID', 'InstituteID');
     }
 
     public function getAuthPassword()

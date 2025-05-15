@@ -5,9 +5,10 @@ namespace App\Http\Controllers\admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\Interfaces\UserManageServiceInterface;
-use App\Services\UserManageService;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Department;
+use App\Models\Institute;
 
 class UserManageController extends Controller
 {
@@ -21,8 +22,10 @@ class UserManageController extends Controller
     public function getAllUser()
     {
         $users = $this->userManageService->getAllUser();
+        $departments = Department::all();
+        $institutes = Institute::all();
 
-        return view('contacts-list', compact('users'));
+        return view('contacts-list', compact('users', 'departments', 'institutes'));
     }
 
 
@@ -55,6 +58,9 @@ class UserManageController extends Controller
             'Email' => 'email',
             'PhoneNumber' => 'string',
             'Address' => 'string',
+            'DepartmentID' => 'required|exists:departments,DepartmentID',
+            'InstituteID' => 'required|exists:institutes,InstituteID',
+            'ClassName' => 'string',
             'dob' => 'string',
             'Avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
         ]);
@@ -70,8 +76,11 @@ class UserManageController extends Controller
             'Email',
             'PhoneNumber',
             'Address',
+            'DepartmentID',
+            'InstituteID',
+            'ClassName',
             'dob',
-            'Avatar'
+            'Avatar',
         ]);
 
         if ($request->hasFile('Avatar')) {
@@ -91,16 +100,17 @@ class UserManageController extends Controller
     public function create(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'UserName' => 'required|string|unique:account,UserName',
+            'UserName' => 'string',
             'FullName' => 'string',
-            'StudentCode' => 'required|string|unique:account,StudentCode',
+            'StudentCode' => 'string',
             'Email' => 'email',
             'PhoneNumber' => 'string',
             'Address' => 'string',
+            'DepartmentID' => 'required|exists:departments,DepartmentID',
+            'InstituteID' => 'required|exists:institutes,InstituteID',
+            'ClassName' => 'string',
             'dob' => 'string',
             'Avatar' => 'nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
-            'Role' => 'int',
-            'Password' => 'string',
         ]);
 
         if ($validator->fails()) {
@@ -114,10 +124,12 @@ class UserManageController extends Controller
             'Email',
             'PhoneNumber',
             'Address',
+            'DepartmentID',
+            'InstituteID',
+            'ClassName',
             'dob',
             'Avatar',
-            'Role',
-            'Password'
+            'Password',
         ]);
 
         $data['Password'] = Hash::make($data['Password']);

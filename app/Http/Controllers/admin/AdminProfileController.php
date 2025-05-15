@@ -48,7 +48,7 @@ class AdminProfileController extends Controller
             'Email',
             'PhoneNumber',
             'dob',
-            'Avatar'
+            'Avatar',
         ]);
 
         if ($request->hasFile('Avatar')) {

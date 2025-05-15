@@ -106,8 +106,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="ecommerce-products" key="t-products">@lang('translation.Products')</a></li>
-                        <li><a href="ecommerce-product-detail"
-                                key="t-product-detail">@lang('translation.Product_Detail')</a></li>
+                        <li><a href="ecommerce-product-detail" key="t-product-detail">@lang('translation.Product_Detail')</a></li>
                         <li><a href="ecommerce-orders" key="t-orders">@lang('translation.Orders')</a></li>
                         <li><a href="ecommerce-customers" key="t-customers">@lang('translation.Customers')</a></li>
                         <li><a href="ecommerce-cart" key="t-cart">@lang('translation.Cart')</a></li>
@@ -255,22 +254,17 @@
                         <li><a href="auth-register-2" key="t-register-2">@lang('translation.Register') 2</a></li>
                         <li><a href="auth-recoverpw" key="t-recover-password">@lang('translation.Recover_Password')</a>
                         </li>
-                        <li><a href="auth-recoverpw-2" key="t-recover-password-2">@lang('translation.Recover_Password')
-                                2</a></li>
+                        <li><a href="auth-recoverpw-2" key="t-recover-password-2">@lang('translation.Recover_Password')2</a></li>
                         <li><a href="auth-lock-screen" key="t-lock-screen">@lang('translation.Lock_Screen')</a></li>
                         <li><a href="auth-lock-screen-2" key="t-lock-screen-2">@lang('translation.Lock_Screen') 2</a>
                         </li>
                         <li><a href="auth-confirm-mail" key="t-confirm-mail">@lang('translation.Confirm_Mail')</a></li>
                         <li><a href="auth-confirm-mail-2" key="t-confirm-mail-2">@lang('translation.Confirm_Mail') 2</a>
                         </li>
-                        <li><a href="auth-email-verification"
-                                key="t-email-verification">@lang('translation.Email_verification')</a></li>
-                        <li><a href="auth-email-verification-2"
-                                key="t-email-verification-2">@lang('translation.Email_verification') 2</a></li>
-                        <li><a href="auth-two-step-verification"
-                                key="t-two-step-verification">@lang('translation.Two_step_verification')</a></li>
-                        <li><a href="auth-two-step-verification-2"
-                                key="t-two-step-verification-2">@lang('translation.Two_step_verification') 2</a></li>
+                        <li><a href="auth-email-verification" key="t-email-verification">@lang('translation.Email_verification')</a></li>
+                        <li><a href="auth-email-verification-2" key="t-email-verification-2">@lang('translation.Email_verification') 2</a></li>
+                        <li><a href="auth-two-step-verification" key="t-two-step-verification">@lang('translation.Two_step_verification')</a></li>
+                        <li><a href="auth-two-step-verification-2" key="t-two-step-verification-2">@lang('translation.Two_step_verification') 2</a></li>
                     </ul>
                 </li>
 
@@ -335,8 +329,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="form-elements" key="t-form-elements">@lang('translation.Form_Elements')</a></li>
                         <li><a href="form-layouts" key="t-form-layouts">@lang('translation.Form_Layouts')</a></li>
-                        <li><a href="form-validation" key="t-form-validation">@lang('translation.Form_Validation')</a>
-                        </li>
+                        <li><a href="form-validation" key="t-form-validation">@lang('translation.Form_Validation')</a></li>
                         <li><a href="form-advanced" key="t-form-advanced">@lang('translation.Form_Advanced')</a></li>
                         <li><a href="form-editors" key="t-form-editors">@lang('translation.Form_Editors')</a></li>
                         <li><a href="form-uploads" key="t-form-upload">@lang('translation.Form_File_Upload')</a></li>
@@ -374,8 +367,7 @@
                         <li><a href="charts-flot" key="t-flot-charts">@lang('translation.Flot_Charts')</a></li>
                         <li><a href="charts-tui" key="t-ui-charts">@lang('translation.Toast_UI_Charts')</a></li>
                         <li><a href="charts-knob" key="t-knob-charts">@lang('translation.Jquery_Knob_Charts')</a></li>
-                        <li><a href="charts-sparkline"
-                                key="t-sparkline-charts">@lang('translation.Sparkline_Charts')</a></li>
+                        <li><a href="charts-sparkline" key="t-sparkline-charts">@lang('translation.Sparkline_Charts')</a></li>
                     </ul>
                 </li>
 
@@ -386,8 +378,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="icons-boxicons" key="t-boxicons">@lang('translation.Boxicons')</a></li>
-                        <li><a href="icons-materialdesign"
-                                key="t-material-design">@lang('translation.Material_Design')</a></li>
+                        <li><a href="icons-materialdesign" key="t-material-design">@lang('translation.Material_Design')</a></li>
                         <li><a href="icons-dripicons" key="t-dripicons">@lang('translation.Dripicons')</a></li>
                         <li><a href="icons-fontawesome" key="t-font-awesome">@lang('translation.Font_awesome')</a></li>
                     </ul>

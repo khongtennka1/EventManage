@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Repositories;
-use App\Models\Events;
+use App\Models\Event;
 
 use App\Repositories\Interfaces\EventManageRepositoryInterface;
 
@@ -9,7 +9,7 @@ class EventManageRepository implements EventManageRepositoryInterface
 {
     protected $model;
 
-    public function __construct(Events $event) {
+    public function __construct(Event $event) {
         $this->model = $event;
     }
 
